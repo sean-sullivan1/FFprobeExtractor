@@ -1,0 +1,16 @@
+To Do:
+
+Index directory given finding all files of specified types
+
+Use ffprobe.ee with arguments to see al lfile information and store stdout in new list stdout
+
+Give option to write stdout per file line by line without \n
+
+Give option to write stdout per file preserving formatting
+
+Parse stdout for container, codec, file length, file size, bitrate, using JSON
+
+Give option to write parsed JSON or unparsed JSON
+
+Give option to display average information to command line
+
