@@ -23,5 +23,7 @@ path = 'z:\\TV Shows\\'
 FileList  = getListOfFiles(path)
 for i in FileList:
 	print (i)
+	# If wanted to print each line by line
+	print ()
 #duration = subprocess.call([])
 #print(duration)
