@@ -1,5 +1,8 @@
 import os
 import subprocess
+import shlex
+import json
+
 '''
 For the given path, get the List of all files in the directory tree 
 '''
@@ -19,11 +22,24 @@ def getListOfFiles(dirName):
 			allFiles.append(fullPath)
 	return allFiles
 
+def findVideoMetadata(pathToInputVideo):
+	cmd = "ffprobe.exe -v quiet -print_format json -show_streams -show_format"
+	args = shlex.split(cmd)
+	args.append(pathToInputVideo)
+	# run the ffprobe process, decode stdout into utf-a and convert to JSON
+	ffprobeOutput = subprocess.check_output(args).decode('utf-8')
+	ffprobeOutput = json.loads(ffprobeOutput)
+	jsonList.append(ffprobeOutput)
+
 path = 'z:\\TV Shows\\'
-FileList  = getListOfFiles(path)
-for i in FileList:
-	print (i)
-	# If wanted to print each line by line
-	print ()
-#duration = subprocess.call([])
-#print(duration)
+fileList = getListOfFiles(path)
+jsonList = list()
+
+findVideoMetadata(fileList[3])
+print(jsonList[0])
+
+if 1 == 0:
+	for i in fileList:
+		print (i)
+		# If wanted to print each line by line
+		print ()
