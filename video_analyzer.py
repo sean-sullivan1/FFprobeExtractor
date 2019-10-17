@@ -7,12 +7,12 @@ import subprocess
 #Configurable variables
 use_ini_file         = False                #Allows values in the settings.ini file to overide hardcoded variables
 path                 = 'z:\\TV Shows\\'     #Root directory for the getListOfFiles method. All sub-directories will be recursively searched for all files
-extension_white_list =("mp4","mkv")         #Defines which file extensions will be white listed
+extensionWhiteList   =("mp4","mkv","avi")   #Defines which file extensions will be white listed
 
 #Non-configurable variables
-fileList         = list()                   #Unfiltered fileList
-filteredFileList = list()                   #Filtered fileList
-jsonList         = list()                   #Stores JSON output for every file in filteredFileList
+fileList         = []          #Unfiltered fileList
+filteredFileList = []          #Filtered fileList
+jsonList         = []          #Stores JSON output for every file in filteredFileList
 
 #Generates settings.ini file if missing and use_ini_file is set to True
 #TODO def generateINI
@@ -25,7 +25,7 @@ def getListOfFiles(dirName):
 	# create a list of file and sub directories 
 	# names in the given directory 
 	listOfFile = os.listdir(dirName)
-	allFiles = list()
+	allFiles = []
 	# Iterate over all the entries
 	for entry in listOfFile:
 		# Create full path
@@ -38,7 +38,14 @@ def getListOfFiles(dirName):
 	return allFiles
 
 #Filters fileList to only contain file with white listed extensions
-#TODO def filterList
+def filterList(list):
+	filteredList = []
+	for i in list:
+		fileExtension = i[-3:].upper()
+		for j in extensionWhiteList:
+			if fileExtension == j.upper():
+				filteredList.append(i)
+	return filteredList
 
 #Uses ffprobe to get file info and returns info in JSON format
 def getVideoMetadata(pathToVideo):
@@ -52,11 +59,12 @@ def getVideoMetadata(pathToVideo):
 	return ffprobeOutput
 
 fileList = getListOfFiles(path)
-jsonList.append(getVideoMetadata(fileList[3]))
-print(jsonList[0])
+filteredFileList = filterList(fileList)
+jsonList.append(getVideoMetadata(filteredFileList[0]))
+#print(jsonList[0])
 
-# if 1 == 0:
-	# for i in fileList:
-		# print (i)
-		# # If wanted to print each line by line
-		# print ()
+if True:
+	for i in filteredFileList:
+		print (i)
+		# If wanted to print each line by line
+		print ()
