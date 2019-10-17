@@ -1,0 +1,71 @@
+ffprobe sample output
+
+ffprobe version 4.2 Copyright (c) 2007-2019 the FFmpeg developers
+  built with gcc 9.1.1 (GCC) 20190807
+  configuration: --enable-gpl --enable-version3 --enable-sdl2 --enable-fontconfig --enable-gnutls --enable-iconv --enable-libass --enable-libdav1d --enable-libbluray --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libopus --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libtheora --enable-libtwolame --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libzimg --enable-lzma --enable-zlib --enable-gmp --enable-libvidstab --enable-libvorbis --enable-libvo-amrwbenc --enable-libmysofa --enable-libspeex --enable-libxvid --enable-libaom --enable-libmfx --enable-amf --enable-ffnvcodec --enable-cuvid --enable-d3d11va --enable-nvenc --enable-nvdec --enable-dxva2 --enable-avisynth --enable-libopenmpt
+  libavutil      56. 31.100 / 56. 31.100
+  libavcodec     58. 54.100 / 58. 54.100
+  libavformat    58. 29.100 / 58. 29.100
+  libavdevice    58.  8.100 / 58.  8.100
+  libavfilter     7. 57.100 /  7. 57.100
+  libswscale      5.  5.100 /  5.  5.100
+  libswresample   3.  5.100 /  3.  5.100
+  libpostproc    55.  5.100 / 55.  5.100
+Input #0, matroska,webm, from 'Z:\Anime TV\Arifureta Shokugyou de Sekai Saikyou\Season 1\[HorribleSubs] Arifureta Shokugyou de Sekai Saikyou - 10 [1080p].mkv':
+  Metadata:
+    encoder         : no_variable_data
+    creation_time   : 1970-01-01T00:00:00.000000Z
+  Duration: 00:23:42.02, start: 0.000000, bitrate: 7966 kb/s
+    Stream #0:0: Video: h264 (High), yuv420p(progressive), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 47.95 tbc (default)
+    Metadata:
+      BPS             : 7709114
+      BPS-eng         : 7709114
+      DURATION        : 00:23:41.962000000
+      DURATION-eng    : 00:23:41.962000000
+      NUMBER_OF_FRAMES: 34093
+      NUMBER_OF_FRAMES-eng: 34093
+      NUMBER_OF_BYTES : 1370258396
+      NUMBER_OF_BYTES-eng: 1370258396
+      _STATISTICS_WRITING_APP: no_variable_data
+      _STATISTICS_WRITING_APP-eng: no_variable_data
+      _STATISTICS_WRITING_DATE_UTC: 1970-01-01 00:00:00
+      _STATISTICS_WRITING_DATE_UTC-eng: 1970-01-01 00:00:00
+      _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+      _STATISTICS_TAGS-eng: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+    Stream #0:1(jpn): Audio: aac (LC), 48000 Hz, stereo, fltp (default)
+    Metadata:
+      BPS             : 253375
+      BPS-eng         : 253375
+      DURATION        : 00:23:42.016000000
+      DURATION-eng    : 00:23:42.016000000
+      NUMBER_OF_FRAMES: 66657
+      NUMBER_OF_FRAMES-eng: 66657
+      NUMBER_OF_BYTES : 45037914
+      NUMBER_OF_BYTES-eng: 45037914
+      _STATISTICS_WRITING_APP: no_variable_data
+      _STATISTICS_WRITING_APP-eng: no_variable_data
+      _STATISTICS_WRITING_DATE_UTC: 1970-01-01 00:00:00
+      _STATISTICS_WRITING_DATE_UTC-eng: 1970-01-01 00:00:00
+      _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+      _STATISTICS_TAGS-eng: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+    Stream #0:2(eng): Subtitle: ass (default)
+    Metadata:
+      BPS             : 83
+      BPS-eng         : 83
+      DURATION        : 00:23:20.340000000
+      DURATION-eng    : 00:23:20.340000000
+      NUMBER_OF_FRAMES: 257
+      NUMBER_OF_FRAMES-eng: 257
+      NUMBER_OF_BYTES : 14629
+      NUMBER_OF_BYTES-eng: 14629
+      _STATISTICS_WRITING_APP: no_variable_data
+      _STATISTICS_WRITING_APP-eng: no_variable_data
+      _STATISTICS_WRITING_DATE_UTC: 1970-01-01 00:00:00
+      _STATISTICS_WRITING_DATE_UTC-eng: 1970-01-01 00:00:00
+      _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+      _STATISTICS_TAGS-eng: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+    Stream #0:3: Attachment: ttf
+    Metadata:
+      filename        : OpenSans-Semibold.ttf
+      mimetype        : application/x-truetype-font
+Unsupported codec with id 98304 for input stream 3

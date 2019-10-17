@@ -1,11 +1,26 @@
 import os
-import subprocess
 import shlex
 import json
+import time
+import subprocess
 
-'''
-For the given path, get the List of all files in the directory tree 
-'''
+#Configurable variables
+use_ini_file         = False                #Allows values in the settings.ini file to overide hardcoded variables
+path                 = 'z:\\TV Shows\\'     #Root directory for the getListOfFiles method. All sub-directories will be recursively searched for all files
+extension_white_list =("mp4","mkv")         #Defines which file extensions will be white listed
+
+#Non-configurable variables
+fileList         = list()                   #Unfiltered fileList
+filteredFileList = list()                   #Filtered fileList
+jsonList         = list()                   #Stores JSON output for every file in filteredFileList
+
+#Generates settings.ini file if missing and use_ini_file is set to True
+#TODO def generateINI
+
+#Loads the settings from the settings.ini file
+#TODO def loadINI
+
+#Recursively searches for files in the given path (root directory)
 def getListOfFiles(dirName):
 	# create a list of file and sub directories 
 	# names in the given directory 
@@ -22,24 +37,26 @@ def getListOfFiles(dirName):
 			allFiles.append(fullPath)
 	return allFiles
 
-def findVideoMetadata(pathToInputVideo):
+#Filters fileList to only contain file with white listed extensions
+#TODO def filterList
+
+#Uses ffprobe to get file info and returns info in JSON format
+def getVideoMetadata(pathToVideo):
 	cmd = "ffprobe.exe -v quiet -print_format json -show_streams -show_format"
 	args = shlex.split(cmd)
-	args.append(pathToInputVideo)
+	args.append(pathToVideo)
 	# run the ffprobe process, decode stdout into utf-a and convert to JSON
 	ffprobeOutput = subprocess.check_output(args).decode('utf-8')
 	ffprobeOutput = json.loads(ffprobeOutput)
-	jsonList.append(ffprobeOutput)
+	#jsonList.append(ffprobeOutput)
+	return ffprobeOutput
 
-path = 'z:\\TV Shows\\'
 fileList = getListOfFiles(path)
-jsonList = list()
-
-findVideoMetadata(fileList[3])
+jsonList.append(getVideoMetadata(fileList[3]))
 print(jsonList[0])
 
-if 1 == 0:
-	for i in fileList:
-		print (i)
-		# If wanted to print each line by line
-		print ()
+# if 1 == 0:
+	# for i in fileList:
+		# print (i)
+		# # If wanted to print each line by line
+		# print ()
