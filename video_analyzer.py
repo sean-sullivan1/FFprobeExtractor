@@ -38,7 +38,7 @@ def getListOfFiles(dirName):
 	return allFiles
 
 #Filters fileList to only contain file with white listed extensions
-def filterList(list):
+def getFilteredFileList(list):
 	filteredList = []
 	for i in list:
 		fileExtension = i[-3:].upper()
@@ -53,17 +53,31 @@ def getVideoMetadata(pathToVideo):
 	args = shlex.split(cmd)
 	args.append(pathToVideo)
 	# run the ffprobe process, decode stdout into utf-a and convert to JSON
-	ffprobeOutput = subprocess.check_output(args).decode('utf-8')
-	ffprobeOutput = json.loads(ffprobeOutput)
-	#jsonList.append(ffprobeOutput)
+	try:
+		ffprobeOutput = subprocess.check_output(args).decode('utf-8')
+		ffprobeOutput = json.loads(ffprobeOutput)
+	except:
+		print("Error, incompatible file format detected at location " + pathToVideo)
+		ffprobeOutput = "ERROR"
 	return ffprobeOutput
 
-fileList = getListOfFiles(path)
-filteredFileList = filterList(fileList)
-jsonList.append(getVideoMetadata(filteredFileList[0]))
-#print(jsonList[0])
+def getJsonList(filteredFileList):
+	list = []
+	for index, i in enumerate(filteredFileList):
+		json = getVideoMetadata(i)
+		if (json == "ERROR"):
+			continue
+		list.append(json)
+		print(index)
+	return list
 
-if True:
+fileList         = getListOfFiles(path)
+filteredFileList = getFilteredFileList(fileList)
+jsonList         = getJsonList(filteredFileList)
+
+print(jsonList[0])
+
+if False:
 	for i in filteredFileList:
 		print (i)
 		# If wanted to print each line by line
