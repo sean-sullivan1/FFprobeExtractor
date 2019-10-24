@@ -3,16 +3,15 @@ import shlex
 import json
 import time
 import subprocess
+import multiprocessing
 
 #Configurable variables
-use_ini_file         = False                #Allows values in the settings.ini file to overide hardcoded variables
-path                 = 'z:\\TV Shows\\'     #Root directory for the getListOfFiles method. All sub-directories will be recursively searched for all files
-extensionWhiteList   =("mp4","mkv","avi")   #Defines which file extensions will be white listed
+use_ini_file = False                #Allows values in the settings.ini file to overide hardcoded variables
+path         = 'z:\\TV Shows\\'     #Root directory for the getListOfFiles method. All sub-directories will be recursively searched for all files
 
 #Non-configurable variables
-fileList         = []          #Unfiltered fileList
-filteredFileList = []          #Filtered fileList
-jsonList         = []          #Stores JSON output for every file in filteredFileList
+fileList = []          #Unfiltered fileList
+jsonList = []          #Stores JSON output for every file in filteredFileList
 
 #Generates settings.ini file if missing and use_ini_file is set to True
 #TODO def generateINI
@@ -51,28 +50,49 @@ def getVideoMetadata(pathToVideo):
         ffprobeOutput = "ERROR"
     return ffprobeOutput
 
-def getJsonList(fileList):
-    list = []
+def getJson(index, fileList, return_list):
+    path = fileList[index]
+    data = getVideoMetadata(path)
+    if (data == "ERROR"):
+        print("test")
+    else:
+        data = json.dumps(data)
+        return_list.append = data
+
+# def getJsonList(fileList):
+#     list = []
+#     length = len(fileList)
+#     for index, i in enumerate(fileList):
+#         json = getVideoMetadata(i)
+#         if (json == "ERROR"):
+#             continue
+#         list.append(json)
+#         print("File " + str(index) + " of " + str(length), end='\r', flush=True)
+#     return list
+
+if __name__ == '__main__':
+    print("Getting list of all files")
+    print()
+    fileList = getListOfFiles(path)
+    print("Running ffprobe and converting to JSON")
+    print()
+    manager = multiprocessing.Manager()
+    return_list = manager.list()
+    jobs = []
     length = len(fileList)
     for index, i in enumerate(fileList):
-        json = getVideoMetadata(i)
-        if (json == "ERROR"):
-            continue
-        list.append(json)
-        print("File " + str(index) + " of " + str(length), end='\r', flush=True)
-    return list
+        p = multiprocessing.Process(target=getJson, args=(index, fileList, return_list))
+        jobs.append(p)
+        p.start()
+        print("Processing file " + str(index) + " of " + str(length), end='\r', flush=True)
 
-print("Getting list of all files")
-print()
-fileList = getListOfFiles(path)
-print("Running ffprobe and converting to JSON")
-print()
-jsonList = getJsonList(fileList)
+    for proc in jobs:
+        proc.join()
 
-print(jsonList[0])
+    print(return_list[0])
 
-if False:
-    for i in filteredFileList:
-        print (i)
-        # If wanted to print each line by line
-        print ()
+# if True:
+#     for i in return_list:
+#         print (i)
+#         # If wanted to print each line by line
+#         print ()
