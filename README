@@ -1,0 +1,2 @@
+This application uses ffprobe.exe to extract codec information from video files. 
+The purpose of this application is to determine usage statistics for video codecs and containers. This was created to enable me to analyze my video library and determine the best codec to re-encode my library too while maintaing quality and space efficiency.
